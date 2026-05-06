@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Asia Trip 2026</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,system-ui,sans-serif;background:#f5f2ee;max-width:430px;margin:0 auto;min-height:100vh}
+button{font-family:inherit;cursor:pointer}
+.hdr{background:#111;padding:16px 16px 0}
+.hdr h1{font-size:18px;font-weight:500;color:#f5f2ee;margin-bottom:2px}
+.hdr p{font-size:10px;color:rgba(255,255,255,0.35);margin-bottom:12px}
+.tabs{display:-webkit-flex;display:flex}
+.tab{padding:7px 10px;font-size:12px;font-weight:500;background:none;border:none;border-bottom:2px solid transparent;color:rgba(255,255,255,0.4)}
+.tab.on{border-bottom-color:#c4a882;color:#c4a882}
+.pane{display:none}.pane.on{display:block}
+.chips{display:-webkit-flex;display:flex;overflow-x:auto;gap:5px;padding:8px 16px;-webkit-overflow-scrolling:touch}
+.chip{flex-shrink:0;padding:4px 11px;font-size:11px;font-weight:500;border-radius:20px;border:1px solid rgba(0,0,0,0.09);background:transparent;color:#7a7268}
+.chip.on{background:#c4a882;border-color:#c4a882;color:#fff}
+.wx{margin:0 16px 8px;padding:7px 12px;border-radius:8px;font-size:11px;color:#7a7268;background:#ede9e3;border:1px solid rgba(0,0,0,0.09)}
+.wx.cold{background:rgba(180,140,50,0.08);border-color:rgba(180,140,50,0.3)}
+.days{padding:0 16px 32px}
+.card{background:#fff;border:1px solid rgba(0,0,0,0.09);border-radius:12px;padding:14px;margin-bottom:10px}
+.card.ev{background:#1a1a2e;border-color:#2a2a4a}
+.card.bad{border-color:#d94f3f}
+.cmeta{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#7a7268;margin-bottom:3px}
+.card.ev .cmeta{color:#7a6e5e}
+.cttl{font-size:15px;font-weight:500;color:#1c1a18;margin-bottom:8px}
+.card.ev .cttl{color:#d8d0c0}
+.ochip{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;gap:7px;padding:6px 10px;background:#ede9e3;border-radius:8px;margin-bottom:8px}
+.card.ev .ochip{background:rgba(255,255,255,0.05)}
+.oname{flex:1;font-size:12px;font-weight:500;color:#1c1a18}
+.card.ev .oname{color:#d8d0c0}
+.itrow{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;gap:6px;margin-bottom:4px;font-size:12px;color:#1c1a18}
+.ofcard.ev .itrow,.card.ev .itrow{color:#d8d0c0}
+.itrow.bad{color:#d94f3f}
+.dot{width:4px;height:4px;border-radius:50%;flex-shrink:0;background:#c4a882}
+.dot.r{background:#d94f3f}.dot.g{background:#7a7268}
+.wct{font-size:10px;color:#7a7268;margin-left:4px}
+.itrow.bad .wct{color:#d94f3f}
+.jwl{border-top:1px solid rgba(0,0,0,0.09);padding-top:8px;margin-top:8px;font-size:11px;color:#7a7268;line-height:1.6}
+.card.ev .jwl,.ofcard.ev .jwl{border-color:#2a2a4a;color:#7a6e5e}
+.jlbl{font-size:9px;text-transform:uppercase;color:#c4a882}
+.tag{font-size:9px;padding:2px 7px;border-radius:20px;background:rgba(0,0,0,0.06);font-weight:500;text-transform:uppercase}
+.evb{font-size:9px;padding:2px 7px;border-radius:20px;background:rgba(196,168,130,0.15);color:#c4a882;border:1px solid #c4a882;font-weight:500;text-transform:uppercase}
+.bg{background:none;border:1px solid rgba(0,0,0,0.09);border-radius:6px;padding:3px 7px;font-size:10px;color:#7a7268}
+.gg{background:none;border:1px solid #c4a882;border-radius:6px;padding:3px 7px;font-size:10px;color:#c4a882}
+.rd{background:none;border:1px solid rgba(217,79,63,0.3);border-radius:6px;padding:3px 7px;font-size:10px;color:#d94f3f}
+.asgn{width:100%;padding:10px;font-size:12px;background:none;border:1px dashed #c4a882;border-radius:8px;color:#c4a882;opacity:.7}
+.btnew{font-size:12px;padding:6px 14px;background:#c4a882;color:#fff;border:none;border-radius:20px;font-weight:500}
+.bsave{flex:1;padding:10px;font-size:13px;background:#c4a882;color:#fff;border:none;border-radius:8px;font-weight:500}
+.bcan{flex:1;padding:10px;font-size:13px;background:none;border:1px solid rgba(0,0,0,0.09);border-radius:8px;color:#7a7268}
+.ncard{background:#ede9e3;border:1px dashed #c4a882;border-radius:8px;padding:10px 14px;margin-bottom:10px;text-align:center;font-size:12px;color:#7a7268}
+.ncard b{display:block;font-size:13px;color:#1c1a18;margin-bottom:2px}
+.sec{padding:12px 16px 32px}
+.shdr{display:-webkit-flex;display:flex;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;align-items:center;margin-bottom:12px}
+.shdr span{font-size:13px;font-weight:500;color:#1c1a18}
+.ofcard{background:#fff;border:1px solid rgba(0,0,0,0.09);border-radius:12px;padding:14px;margin-bottom:10px}
+.ofcard.ev{background:#1a1a2e;border-color:#2a2a4a}
+.ofcard.bad{border-color:#d94f3f}
+.ofn{font-size:14px;font-weight:500;color:#1c1a18}
+.ofcard.ev .ofn{color:#d8d0c0}
+.ofmeta{display:-webkit-flex;display:flex;gap:5px;margin-top:4px;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-align-items:center;align-items:center;font-size:10px;color:#7a7268}
+.used{color:#c4a882}
+.phdr{display:-webkit-flex;display:flex;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;align-items:center;padding:10px 16px;border-bottom:1px solid rgba(0,0,0,0.09);background:#ede9e3;position:-webkit-sticky;position:sticky;top:0;z-index:5}
+.phdr span{font-size:11px;color:#7a7268}
+.cathdr{padding:12px 16px 6px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#7a7268;display:-webkit-flex;display:flex;-webkit-justify-content:space-between;justify-content:space-between}
+.cathdr span:last-child{color:#c4a882}
+.prow{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;padding:10px 16px;border-bottom:1px solid rgba(0,0,0,0.09)}
+.prow.done .pnm{text-decoration:line-through}
+.prow.done .ptap{opacity:.38}
+.ptap{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;gap:12px;flex:1;cursor:pointer}
+.chk{width:18px;height:18px;border-radius:50%;border:1px solid rgba(0,0,0,0.09);flex-shrink:0;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;font-size:10px;color:#fff}
+.chk.on{background:#c4a882;border-color:#c4a882}
+.pnm{font-size:13px;color:#1c1a18}
+.psub{font-size:10px;color:#7a7268}
+.rtr{font-size:9px;padding:2px 6px;border-radius:20px;background:rgba(42,122,84,0.08);color:#2a7a54;border:1px solid rgba(42,122,84,0.3);font-weight:500;flex-shrink:0}
+.pbtns{display:-webkit-flex;display:flex;gap:5px;margin-left:10px;flex-shrink:0;-webkit-align-items:center;align-items:center}
+.fcrd{border-radius:8px;padding:8px 12px;margin-bottom:6px;font-size:12px;color:#1c1a18}
+.fcrd.r{background:rgba(217,79,63,0.08);border:1px solid rgba(217,79,63,0.25)}
+.fcrd.a{background:rgba(180,140,50,0.08);border:1px solid rgba(180,140,50,0.25)}
+.fcrd.g{background:rgba(42,122,84,0.08);border:1px solid rgba(42,122,84,0.25);font-size:13px;color:#2a7a54}
+.wcrow{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(0,0,0,0.09)}
+.wbar{width:50px;height:3px;background:rgba(0,0,0,0.06);border-radius:2px;margin-top:3px}
+.wfill{height:100%;border-radius:2px}
+.overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:100;-webkit-align-items:flex-end;align-items:flex-end}
+.overlay.on{display:-webkit-flex;display:flex}
+.sheet{background:#fff;border-radius:16px 16px 0 0;padding:20px;width:100%;height:85vh;overflow-y:scroll;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.sheet h2{font-size:14px;font-weight:500;color:#1c1a18;margin-bottom:12px}
+.inp{padding:7px 9px;font-size:16px;border-radius:6px;border:1px solid rgba(0,0,0,0.2);background:#fff;color:#1c1a18;font-family:inherit;width:100%}
+.ilbl{font-size:10px;color:#7a7268;margin:8px 0 3px}
+.irow{display:-webkit-flex;display:flex;gap:8px}
+.irow>div{flex:1}
+.sel{width:100%;padding:7px 8px;font-size:16px;border-radius:6px;border:1px solid rgba(0,0,0,0.2);background:#fff;color:#1c1a18;font-family:inherit}
+.tlbl{font-size:9px;color:#7a7268;text-transform:uppercase;letter-spacing:.1em;margin:8px 0 4px}
+.igrid{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;gap:5px;margin-bottom:4px}
+.ibtn{font-size:11px;padding:4px 9px;border-radius:20px;border:1px solid rgba(0,0,0,0.09);background:transparent;color:#7a7268}
+.ibtn.on{border-color:#c4a882;background:rgba(196,168,130,0.15);color:#c4a882}
+.brow{display:-webkit-flex;display:flex;gap:8px;margin-top:14px}
+.div{height:1px;background:rgba(0,0,0,0.09);margin:12px 0}
+.cfmtxt{font-size:10px;color:#7a7268;white-space:nowrap}
+.sync{position:fixed;top:8px;right:8px;font-size:10px;padding:3px 8px;border-radius:20px;background:rgba(42,122,84,0.15);color:#2a7a54;z-index:200;transition:opacity 0.5s}
+.sync.err{background:rgba(217,79,63,0.15);color:#d94f3f}
+.sync.hide{opacity:0}
+</style>
+</head>
+<body>
+<div id="sync-status" class="sync hide">Saved</div>
+<div class="hdr">
+  <h1>Asia Trip 2026</h1>
+  <p>May 8–22 · Tokyo · Beijing · Qingzhou · Qingdao · Seoul</p>
+  <div class="tabs">
+    <button class="tab on" onclick="showTab('sched',this)">Schedule</button>
+    <button class="tab" onclick="showTab('lib',this)">Library</button>
+    <button class="tab" onclick="showTab('pack',this)">Packing</button>
+    <button class="tab" onclick="showTab('recon',this)">Recon</button>
+  </div>
+</div>
+<div id="pane-sched" class="pane on"><div style="padding:40px;text-align:center;color:#7a7268;font-size:13px">Loading...</div></div>
+<div id="pane-lib" class="pane"></div>
+<div id="pane-pack" class="pane"></div>
+<div id="pane-recon" class="pane"></div>
+<div class="overlay" id="m-slot" onclick="closeModal('m-slot')">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <h2 id="m-slot-ttl">Assign outfit</h2>
+    <div id="m-slot-body"></div>
+  </div>
+</div>
+<div class="overlay" id="m-new" onclick="closeModal('m-new')">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <h2>New outfit</h2>
+    <div id="m-new-body"></div>
+  </div>
+</div>
+<div class="overlay" id="m-edit" onclick="closeModal('m-edit')">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <h2>Edit outfit</h2>
+    <div id="m-edit-body"></div>
+  </div>
+</div>
+<div class="overlay" id="m-item" onclick="closeModal('m-item')">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <h2>Add item</h2>
+    <div id="m-item-body"></div>
+  </div>
+</div>
+<div class="overlay" id="m-edititem" onclick="closeModal('m-edititem')">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <h2>Edit item</h2>
+    <div id="m-edititem-body"></div>
+  </div>
+</div>
+
+<script>
+// ── FIREBASE CONFIG ───────────────────────────────────────────────────────
+var FB_URL='https://asia-trip-2026-3ddeb-default-rtdb.firebaseio.com';
+var FB_KEY='AIzaSyBarCSTfMwyqwMBjLek-jVIuZocF'; // from your screenshot
+
+// ── FIREBASE REST HELPERS ─────────────────────────────────────────────────
+function fbGet(path,cb){
+  var xhr=new XMLHttpRequest();
+  xhr.open('GET',FB_URL+path+'.json?auth='+FB_KEY);
+  xhr.onload=function(){
+    try{cb(null,JSON.parse(xhr.responseText));}catch(e){cb(e,null);}
+  };
+  xhr.onerror=function(){cb(new Error('network'),null);};
+  xhr.send();
+}
+function fbSet(path,data,cb){
+  var xhr=new XMLHttpRequest();
+  xhr.open('PUT',FB_URL+path+'.json?auth='+FB_KEY);
+  xhr.setRequestHeader('Content-Type','application/json');
+  xhr.onload=function(){if(cb)cb(xhr.status===200?null:new Error(xhr.status));};
+  xhr.onerror=function(){if(cb)cb(new Error('network'));};
+  xhr.send(JSON.stringify(data));
+}
+
+var _saveTimer=null;
+function saveState(){
+  var ci={};
+  keys(IT).forEach(function(k){if(k[0]==='i')ci[k]=IT[k];});
+  var data={mf:S.mf,days:S.days,checks:S.checks,ci:ci,v:4};
+  clearTimeout(_saveTimer);
+  _saveTimer=setTimeout(function(){
+    fbSet('/state',data,function(err){
+      var el2=el('sync-status');
+      if(err){el2.textContent='Save failed';el2.className='sync err';}
+      else{el2.textContent='Saved ✓';el2.className='sync';}
+      clearTimeout(_saveTimer);
+      _saveTimer=setTimeout(function(){el2.className='sync hide';},2000);
+    });
+  },800);
+}
+
+function loadState(cb){
+  fbGet('/state',function(err,data){
+    if(!err&&data&&data.mf&&data.mf.length&&data.days&&data.days.length){
+      S.mf=data.mf;
+      S.days=data.days;
+      S.checks=data.checks||{};
+      if(data.ci)keys(data.ci).forEach(function(k){IT[k]=data.ci[k];});
+    }else{
+      S.mf=cpOf(OD);S.days=cpDays(DD);S.checks={};
+    }
+    cb();
+  });
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────────────
+function keys(o){return Object.keys(o);}
+function entries(o){var r=[];keys(o).forEach(function(k){r.push([k,o[k]]);});return r;}
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;');}
+function el(id){return document.getElementById(id);}
+function val(id){var e=el(id);return e?e.value:'';}
+function closeModal(id){el(id).classList.remove('on');}
+
+// ── CONSTANTS ─────────────────────────────────────────────────────────────
+var TAGC={dinner:'#9a6820',bop:'#3a6aaa',casual:'#3a7a3a',walking:'#7a5a30','bar hop':'#8a308a',travel:'#555555'};
+var TORD=['top','bottom','dress','outer','shoe'];
+var TLBL={top:'Tops',bottom:'Bottoms',dress:'Dresses',outer:'Outerwear',shoe:'Shoes'};
+var CITIES=['All','Travel','Tokyo','Beijing','Qingzhou','Qingdao','Seoul'];
+var WX={Tokyo:'70-76F days / 57-62F eves / Rain likely',Beijing:'81-90F / Hottest / Linen priority',Qingzhou:'70-75F / Casual',Qingdao:'68-72F / Coastal breeze',Seoul:'68-75F days / 45-57F eves / Layer up'};
+var COLD={Seoul:1};
+var SHOES=['sal','sam','tig','ton','snk'];
+var SKIP=['wta','wtb','sal','dj'];
+var ONEOK=['ct','cs','mn','alc','ls','ton','snk','tig','mj','bz'];
+var PANTS=['btr','bj','blj','wj','cs'];
+var EVE_PAT=/dinner|eve|kbbq|cruise|ikseon|bangida|mongtan/i;
+
+// ── WARDROBE ──────────────────────────────────────────────────────────────
+var IT={
+  bt:{n:'Black tank',t:'top'},wta:{n:'White tank A',t:'top'},wtb:{n:'White tank B',t:'top'},
+  lt:{n:'Loewe tee',t:'top'},wbd:{n:'White BD',t:'top'},ls:{n:'Love Stories sheer',t:'top',r:1},
+  ct:{n:'Crystal top',t:'top'},alc:{n:'ALC Gracie',t:'top',r:1},pl:{n:'Phillip Lim cardigan',t:'top',r:1},
+  btr:{n:'Black trousers',t:'bottom'},bj:{n:'Black jeans',t:'bottom'},cs:{n:'Crystal skirt',t:'bottom'},
+  blj:{n:'Blue jeans',t:'bottom'},wj:{n:'White jeans',t:'bottom',r:1},
+  mn:{n:'Marni dress',t:'dress',r:1},
+  dj:{n:'Denim jacket',t:'outer'},mj:{n:'Moto jacket',t:'outer'},bz:{n:'Blazer',t:'outer'},
+  sal:{n:'Salomons',t:'shoe'},sam:{n:'Sambas',t:'shoe'},tig:{n:'Tigers',t:'shoe'},
+  ton:{n:'Tony Bianco',t:'shoe'},snk:{n:'Snake mule',t:'shoe'}
+};
+
+// ── DEFAULT OUTFITS ───────────────────────────────────────────────────────
+var OD=[
+  {id:'1', n:'Yoriniku eve',                    ev:1,tag:'dinner', it:['btr','bt','mj'],      sh:'tig',j:'Long pendant+bracelet stack',    bag:'Chanel'},
+  {id:'2', n:'Crystal eve',                     ev:1,tag:'dinner', it:['cs','ct'],            sh:'tig',j:'Silver stack+pearl studs',       bag:'Chanel'},
+  {id:'3', n:'Beijing dinner',                  ev:1,tag:'dinner', it:['btr','ct','bz'],      sh:'ton',j:'Delicate silver stack',          bag:'Chanel',  note:'Blazer open'},
+  {id:'4', n:'Polka dot dinner',                ev:1,tag:'dinner', it:['btr','alc','bz'],     sh:'snk',j:'DEMARSON lariat+bracelet stack', bag:'Chanel',  note:'Blazer open'},
+  {id:'5', n:'Seoul KBBQ',                      ev:1,tag:'dinner', it:['bj','bt','ls'],       sh:'ton',j:'Silver stack+chunky bangles',    bag:'Chanel'},
+  {id:'6', n:'Seoul cobblestones',              ev:1,tag:'dinner', it:['btr','ct','bz'],      sh:'tig',j:'Silver stack+bracelet stack',    bag:'Chanel'},
+  {id:'31',n:'BJ + white tank + blazer eve',    ev:1,tag:'dinner', it:['bj','wtb','bz'],      sh:'ton',j:'Silver stack+bracelet stack',    bag:'Chanel',  note:'Blazer open'},
+  {id:'32',n:'Marni dress + blazer eve',        ev:1,tag:'dinner', it:['mn','bz'],            sh:'tig',j:'Silver stack',                   bag:'Chanel'},
+  {id:'47',n:'Love Stories + crystal skirt eve',ev:1,tag:'dinner', it:['cs','ls'],            sh:'tig',j:'Silver stack+chunky bangles',    bag:'Chanel',  note:'No blazer — statement sheer'},
+  {id:'7', n:'Tokyo arrival',                   tag:'casual',  it:['bj','bt','dj'],           sh:'sal',j:'Layered necklaces',              bag:'Cream crossbody'},
+  {id:'35',n:'Shibuya — Crystal skirt + Loewe', tag:'bop',     it:['cs','lt','dj'],           sh:'sam',j:'Silver stack',                   bag:'Cream crossbody'},
+  {id:'36',n:'Kappabashi — Blue jeans + BD',    tag:'bop',     it:['blj','wta','wbd'],        sh:'sam',j:'Layered necklaces',              bag:'Cream crossbody', note:'BD open'},
+  {id:'37',n:'Travel to China',                 tag:'travel',  it:['bj','wtb','pl'],          sh:'sal',j:'Minimal',                        bag:'Travel bag', note:'Cardigan for plane'},
+  {id:'41',n:'Blue jeans + black tank + denim', tag:'casual',  it:['blj','bt','dj'],          sh:'sam',j:'Layered necklaces',              bag:'Cream crossbody'},
+  {id:'44',n:'White jeans + Loewe + denim',     tag:'bop',     it:['wj','lt','dj'],           sh:'sal',j:'Silver stack',                   bag:'Cream crossbody'},
+  {id:'45',n:'Moto bop — WJ + white tank',      tag:'bop',     it:['wj','wta','mj'],          sh:'sam',j:'Layered necklaces',              bag:'Cream crossbody'},
+  {id:'46',n:'Blazer bop — BJ + black tank',    tag:'bop',     it:['blj','bt','bz'],          sh:'sam',j:'Silver stack',                   bag:'Cream crossbody', note:'Blazer open'},
+  {id:'50',n:'Blue jeans + Gracie top',         tag:'bop',     it:['blj','alc'],              sh:'tig',j:'Silver stack+bracelet stack',    bag:'Cream crossbody'},
+  {id:'39',n:'BJ + Loewe + blazer',             tag:'casual',  it:['bj','lt','bz'],           sh:'snk',j:'Silver stack',                   bag:'Cream crossbody', note:'Blazer open'},
+  {id:'42',n:'BJ + Love Stories + blazer',      tag:'bop',     it:['bj','bt','ls','bz'],      sh:'tig',j:'Silver stack+chunky bangles',    bag:'Cream crossbody', note:'Blazer open — sheer underneath'},
+  {id:'43',n:'BTr + white tank + blazer',       tag:'casual',  it:['btr','wtb','bz'],         sh:'sam',j:'Silver stack',                   bag:'Cream crossbody', note:'Blazer open'},
+  {id:'40',n:'WJ + white tank + cardigan',      tag:'casual',  it:['wj','wta','pl'],          sh:'sal',j:'Layered necklaces',              bag:'Cream crossbody'},
+  {id:'20',n:'Scalp AM — crystal skirt + cardigan',tag:'casual',it:['cs','bt','pl'],          sh:'sam',j:'Bracelet stack',                 bag:'Cream crossbody', note:'Cardigan open'},
+  {id:'48',n:'Crystal skirt + white tank',      tag:'bop',     it:['cs','wta'],               sh:'sal',j:'Layered necklaces',              bag:'Cream crossbody', note:'Off-duty luxury'},
+  {id:'49',n:'Crystal skirt + white BD',        tag:'bop',     it:['cs','wbd'],               sh:'tig',j:'Silver stack',                   bag:'Cream crossbody', note:'BD buttoned and tucked'},
+  {id:'18',n:'Marni Seongsu',                   tag:'bop',     it:['mn','dj'],                sh:'tig',j:'Silver stack',                   bag:'Cream crossbody'}
+];
+
+// ── DEFAULT DAYS ──────────────────────────────────────────────────────────
+var DD=[
+  {id:'d1', c:'Travel',   dt:'May 7',         lbl:'Depart Houston'},
+  {id:'d2', c:'Tokyo',    dt:'May 8',          lbl:'Arrival',             oid:'7'},
+  {id:'d3', c:'Tokyo',    dt:'May 9',          lbl:'Shibuya bop',         oid:'35'},
+  {id:'d4', c:'Tokyo',    dt:'May 10 day',     lbl:'Kappabashi',          oid:'36'},
+  {id:'d5', c:'Tokyo',    dt:'May 10 eve',     lbl:'Yoriniku',            oid:'1'},
+  {id:'d6', c:'Beijing',  dt:'May 11',         lbl:'Arrival Beijing',     oid:'37'},
+  {id:'d7', c:'Beijing',  dt:'May 12',         lbl:'Great Wall',          oid:'41'},
+  {id:'d8', c:'Beijing',  dt:'May 11-12 eve',  lbl:'Nice dinner',         oid:'3'},
+  {id:'d9', c:'Qingzhou', dt:'May 13',         lbl:'Walking day 1',       oid:'40'},
+  {id:'d10',c:'Qingzhou', dt:'May 14',         lbl:'Walking day 2',       oid:'43'},
+  {id:'d11',c:'Qingzhou', dt:'May 13-14 eve',  lbl:'Third dinner',        oid:'4'},
+  {id:'d12',c:'Qingdao',  dt:'May 15',         lbl:'Arrival Qingdao',     oid:'44'},
+  {id:'d13',c:'Qingdao',  dt:'May 15',         lbl:'Laundry reset',       note:'Everything washed. Fresh for Seoul.'},
+  {id:'d14',c:'Qingdao',  dt:'May 16',         lbl:'Exploring day 2',     oid:'50'},
+  {id:'d15',c:'Qingdao',  dt:'May 17',         lbl:'Exploring day 3',     oid:'39'},
+  {id:'d16',c:'Qingdao',  dt:'May 18',         lbl:'Post-laundry',        oid:'45'},
+  {id:'d17',c:'Qingdao',  dt:'May 18 eve',     lbl:'Boat cruise',         oid:'2'},
+  {id:'d18',c:'Seoul',    dt:'May 19',         lbl:'Arrival Seoul',       oid:'46'},
+  {id:'d19',c:'Seoul',    dt:'May 20 AM',      lbl:'Scalp treatment',     oid:'20'},
+  {id:'d20',c:'Seoul',    dt:'May 20 PM',      lbl:'Seongsu (Marni)',     oid:'18'},
+  {id:'d21',c:'Seoul',    dt:'May 20 eve',     lbl:'Bangida Ikseon',      oid:'6'},
+  {id:'d22',c:'Seoul',    dt:'May 21 day',     lbl:'Seochon',             oid:'48'},
+  {id:'d23',c:'Seoul',    dt:'May 21 eve',     lbl:'Mongtan KBBQ',        oid:'5'},
+  {id:'d24',c:'Travel',   dt:'May 22',         lbl:'Return home'}
+];
+
+// ── STATE ─────────────────────────────────────────────────────────────────
+var S={mf:[],days:[],city:'All',checks:{}};
+var _rc=null;
+function cpOf(a){return a.map(function(o){var c=Object.assign({},o);c.it=o.it.slice();return c;});}
+function cpDays(a){return a.map(function(d){return Object.assign({},d);});}
+
+// ── RECON ─────────────────────────────────────────────────────────────────
+function buildRecon(){
+  var cnt={};
+  S.days.forEach(function(day,di){
+    if(!day.oid)return;
+    var o=findO(day.oid);if(!o)return;
+    (o.it||[]).concat(o.sh?[o.sh]:[]).forEach(function(id){
+      if(!cnt[id])cnt[id]={n:0,days:[]};
+      cnt[id].n++;cnt[id].days.push({dt:day.dt,c:day.c,di:di});
+    });
+  });
+  var flags=[];
+  keys(cnt).forEach(function(id){
+    var d=cnt[id];
+    if(SHOES.indexOf(id)>=0||SKIP.indexOf(id)>=0)return;
+    var s=d.days.slice().sort(function(a,b){return a.di-b.di;});
+    for(var i=1;i<s.length;i++){
+      if(s[i].di-s[i-1].di<=1)flags.push({type:'btb',id:id,days:[s[i-1].dt,s[i].dt]});
+    }
+    if(d.n===1&&ONEOK.indexOf(id)<0)flags.push({type:'once',id:id,day:d.days[0].dt});
+    if(d.n>4&&PANTS.indexOf(id)<0)flags.push({type:'over',id:id,n:d.n});
+  });
+  var oc={};
+  S.days.forEach(function(d){if(d.oid)oc[d.oid]=(oc[d.oid]||0)+1;});
+  keys(oc).forEach(function(oid){
+    if(oc[oid]>1){var o=findO(oid);if(o)flags.push({type:'dup',oid:oid,nm:o.n,c:oc[oid]});}
+  });
+  return{cnt:cnt,flags:flags};
+}
+function getRC(){if(!_rc)_rc=buildRecon();return _rc;}
+function inv(){_rc=null;}
+function wc(id){return(getRC().cnt[id]||{n:0}).n;}
+function isFl(id){return getRC().flags.some(function(f){return f.id===id;});}
+function oFl(oid){var o=findO(oid);if(!o)return false;return(o.it||[]).concat(o.sh?[o.sh]:[]).some(isFl);}
+function uCt(oid){return S.days.filter(function(d){return d.oid===oid;}).length;}
+function findO(oid){for(var i=0;i<S.mf.length;i++){if(S.mf[i].id===oid)return S.mf[i];}return null;}
+
+// ── RECOMMENDER ───────────────────────────────────────────────────────────
+function scoreO(o,day,di){
+  var isEve=EVE_PAT.test(day.lbl),s=100,r=[],w=[];
+  if(o.ev&&!isEve){s-=40;w.push('Evening outfit for daytime');}
+  if(!o.ev&&isEve){s-=30;w.push('Daytime for evening');}
+  if(o.tag==='dinner'&&isEve){s+=20;r.push('Evening-appropriate');}
+  if(o.tag==='bop'&&!isEve){s+=10;r.push('Good exploring energy');}
+  var all=(o.it||[]).concat(o.sh?[o.sh]:[]);
+  var avg=all.length?all.reduce(function(a,id){return a+wc(id);},0)/all.length:0;
+  if(avg<1){s+=20;r.push('Items need more wear');}
+  else if(avg>3){s-=20;w.push('Items already well-worn');}
+  var prev=di>0?S.days[di-1]:null;
+  if(prev&&prev.oid===o.id){s-=50;w.push('Same as yesterday');}
+  var u=uCt(o.id);
+  if(u===0){s+=15;r.push('Not yet worn');}
+  else if(u>=2){s-=30;w.push('Used '+u+'x already');}
+  if(COLD[day.c]&&!(o.it||[]).some(function(id){return IT[id]&&IT[id].t==='outer';}))w.push('No layer — Seoul chilly');
+  return{score:s,why:r.concat(w.map(function(x){return'⚠ '+x;})).slice(0,3).join(' · ')};
+}
+function getRecs(day,di){
+  var sc=S.mf.map(function(o){var s=scoreO(o,day,di);return{o:o,score:s.score,why:s.why};});
+  sc.sort(function(a,b){return b.score-a.score;});
+  return sc.slice(0,3);
+}
+
+// ── RENDER HELPERS ────────────────────────────────────────────────────────
+function tagBadge(tag){if(!tag||!TAGC[tag])return'';return'<span class="tag" style="color:'+TAGC[tag]+'">'+esc(tag)+'</span>';}
+function evBadge(ev){return ev?'<span class="evb">eve</span>':'';}
+function itemRows(o,ev){
+  var otx=ev?'#d8d0c0':'#1c1a18',omx=ev?'#7a6e5e':'#7a7268',h='';
+  (o.it||[]).forEach(function(id){
+    var item=IT[id];if(!item)return;
+    var f=isFl(id),w=wc(id);
+    h+='<div class="itrow'+(f?' bad':'')+'" style="color:'+(f?'#d94f3f':otx)+'">';
+    h+='<div class="dot'+(f?' r':'')+'"></div>'+esc(item.n);
+    if(w>0)h+='<span class="wct" style="color:'+(f?'#d94f3f':omx)+'">'+w+'x'+(f?' !':'')+'</span>';
+    h+='</div>';
+  });
+  if(o.sh&&IT[o.sh])h+='<div class="itrow" style="color:'+omx+'"><div class="dot g"></div><span style="font-style:italic">'+esc(IT[o.sh].n)+'</span></div>';
+  return h;
+}
+function jwl(o,ev){
+  if(!o.j&&!o.note)return'';
+  var h='<div class="jwl">';
+  if(o.j)h+='<span class="jlbl">Jewelry</span><br>'+esc(o.j)+(o.bag?' / '+esc(o.bag):'');
+  if(o.note)h+='<div style="opacity:.7;margin-top:2px">'+esc(o.note)+'</div>';
+  return h+'</div>';
+}
+function oForm(d,pfx,tfn){
+  var h='<div class="ilbl">Name</div><input class="inp" id="'+pfx+'-n" value="'+esc(d.n||'')+'">';
+  h+='<div class="irow"><div><div class="ilbl">Tag</div><select class="sel" id="'+pfx+'-tag">';
+  keys(TAGC).forEach(function(t){h+='<option value="'+t+'"'+(d.tag===t?' selected':'')+'>'+t+'</option>';});
+  h+='</select></div><div><div class="ilbl">Vibe</div><select class="sel" id="'+pfx+'-ev">';
+  h+='<option value="0"'+(d.ev?'':' selected')+'>Daytime</option><option value="1"'+(d.ev?' selected':'')+'>Evening</option>';
+  h+='</select></div></div>';
+  h+='<div class="ilbl" style="text-transform:uppercase;letter-spacing:.1em;margin-top:10px">Items</div>';
+  TORD.forEach(function(type){
+    var ti=entries(IT).filter(function(e){return e[1].t===type;});if(!ti.length)return;
+    h+='<div class="tlbl">'+TLBL[type]+'</div><div class="igrid">';
+    ti.forEach(function(e){
+      var id=e[0],isSh=type==='shoe',sel=isSh?(d.sh===id):(d.it||[]).indexOf(id)>=0;
+      h+='<button class="ibtn'+(sel?' on':'')+'" onclick="'+tfn+'(\''+id+'\','+isSh+')">'+esc(e[1].n)+'</button>';
+    });
+    h+='</div>';
+  });
+  h+='<div class="ilbl">Jewelry</div><input class="inp" id="'+pfx+'-j" value="'+esc(d.j||'')+'">';
+  h+='<div class="ilbl">Bag</div><input class="inp" id="'+pfx+'-bag" value="'+esc(d.bag||'')+'">';
+  h+='<div class="ilbl">Notes</div><input class="inp" id="'+pfx+'-note" value="'+esc(d.note||'')+'">';
+  return h;
+}
+function rForm(pfx,d){
+  d.n=val(pfx+'-n');d.tag=val(pfx+'-tag');
+  d.ev=parseInt(val(pfx+'-ev')||'0',10);
+  d.j=val(pfx+'-j');d.bag=val(pfx+'-bag');d.note=val(pfx+'-note');
+}
+
+// ── SCHEDULE ──────────────────────────────────────────────────────────────
+function renderSched(){
+  var h='<div class="chips">';
+  CITIES.forEach(function(c){h+='<button class="chip'+(S.city===c?' on':'')+'" onclick="setCity(\''+c+'\')">'+c+'</button>';});
+  h+='</div>';
+  if(S.city!=='All'&&WX[S.city])h+='<div class="wx'+(COLD[S.city]?' cold':'')+'">'+( COLD[S.city]?'<b>Layer up: </b>':'')+WX[S.city]+'</div>';
+  h+='<div class="days">';
+  var vis=S.city==='All'?S.days:S.days.filter(function(d){return d.c===S.city;});
+  vis.forEach(function(day){
+    var di=S.days.indexOf(day);
+    if(!day.oid&&day.note){h+='<div class="ncard"><b>'+esc(day.lbl)+'</b>'+esc(day.note)+'</div>';return;}
+    var o=day.oid?findO(day.oid):null;
+    var ev=!!(o&&o.ev),hf=!!(o&&oFl(day.oid));
+    h+='<div class="card'+(ev?' ev':'')+(hf?' bad':'')+'">';
+    h+='<div class="cmeta">'+esc(day.c)+' · '+esc(day.dt)+'</div>';
+    h+='<div class="cttl">'+esc(day.lbl)+'</div>';
+    if(o){
+      h+='<div class="ochip"><div class="oname">'+esc(o.n)+'</div>'+tagBadge(o.tag);
+      h+='<button class="gg" onclick="openSlot(\''+day.id+'\','+di+')">change</button>';
+      h+='<button class="bg" style="margin-left:4px" onclick="clrSlot(\''+day.id+'\')">x</button></div>';
+      h+=itemRows(o,ev)+jwl(o,ev);
+    }else{
+      h+='<button class="asgn" onclick="openSlot(\''+day.id+'\','+di+')">+ assign outfit</button>';
+    }
+    h+='</div>';
+  });
+  h+='</div>';
+  el('pane-sched').innerHTML=h;
+}
+function setCity(c){S.city=c;renderSched();}
+function clrSlot(dayId){
+  S.days=S.days.map(function(d){return d.id===dayId?Object.assign({},d,{oid:undefined}):d;});
+  inv();saveState();renderSched();renderRecon();
+}
+
+// ── SLOT MODAL ────────────────────────────────────────────────────────────
+var _sid,_sdi;
+function openSlot(dayId,di){
+  _sid=dayId;_sdi=di;
+  var day=null;for(var i=0;i<S.days.length;i++){if(S.days[i].id===dayId){day=S.days[i];break;}}
+  el('m-slot-ttl').textContent=day?day.lbl:'Assign outfit';
+  var recs=getRecs(day,di);
+  var h='<div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#c4a882;margin-bottom:6px;font-weight:500">Recommended</div>';
+  recs.forEach(function(r){
+    h+='<div style="border:1px solid #c4a882;border-radius:8px;padding:10px 12px;margin-bottom:6px;cursor:pointer" onclick="doSlot(\''+r.o.id+'\')">';
+    h+='<div style="font-size:13px;font-weight:500;color:#1c1a18">'+esc(r.o.n)+'</div>';
+    if(r.why)h+='<div style="font-size:11px;color:#7a7268;margin-top:3px">'+esc(r.why)+'</div>';
+    h+='</div>';
+  });
+  h+='<div class="div"></div><div style="font-size:11px;color:#7a7268;margin-bottom:8px">All outfits</div>';
+  S.mf.forEach(function(o){
+    var u=uCt(o.id);
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.09)" onclick="doSlot(\''+o.id+'\')">';
+    h+='<div><div style="font-size:13px;color:#1c1a18">'+esc(o.n)+'</div><div style="display:flex;gap:5px;margin-top:3px">'+tagBadge(o.tag)+evBadge(o.ev)+'</div></div>';
+    h+='<span style="font-size:10px;color:#7a7268">'+(u>0?u+'x':'')+'</span></div>';
+  });
+  h+='<button class="bcan" style="width:100%;margin-top:12px" onclick="closeModal(\'m-slot\')">Cancel</button>';
+  el('m-slot-body').innerHTML=h;
+  el('m-slot').classList.add('on');
+}
+function doSlot(oid){
+  S.days=S.days.map(function(d){return d.id===_sid?Object.assign({},d,{oid:oid}):d;});
+  inv();saveState();closeModal('m-slot');renderSched();renderRecon();
+}
+
+// ── LIBRARY ───────────────────────────────────────────────────────────────
+function renderLib(){
+  var h='<div class="sec"><div class="shdr"><span>'+S.mf.length+' outfits</span><button class="btnew" onclick="openNew()">+ New outfit</button></div>';
+  S.mf.forEach(function(o){
+    var ev=!!o.ev,hf=oFl(o.id),u=uCt(o.id);
+    h+='<div class="ofcard'+(ev?' ev':'')+(hf?' bad':'')+'">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">';
+    h+='<div style="flex:1"><div class="ofn">'+esc(o.n)+'</div>';
+    h+='<div class="ofmeta">'+tagBadge(o.tag)+evBadge(o.ev)+'<span class="'+(u>0?'used':'')+'">'+( u>0?u+'x scheduled':'unscheduled')+'</span></div></div>';
+    if(o._cfm){
+      h+='<div style="display:flex;gap:5px;align-items:center;margin-left:8px"><span class="cfmtxt">Delete?</span>';
+      h+='<button class="rd" onclick="delOYes(\''+o.id+'\')">yes</button><button class="bg" onclick="delONo(\''+o.id+'\')">no</button></div>';
+    }else{
+      h+='<div style="display:flex;gap:5px;margin-left:8px"><button class="bg" onclick="openEdit(\''+o.id+'\')">edit</button><button class="rd" onclick="delO(\''+o.id+'\')">del</button></div>';
+    }
+    h+='</div>'+itemRows(o,ev)+jwl(o,ev)+'</div>';
+  });
+  h+='</div>';
+  el('pane-lib').innerHTML=h;
+}
+function delO(oid){S.mf=S.mf.map(function(o){return o.id===oid?Object.assign({},o,{_cfm:true}):o;});renderLib();}
+function delOYes(oid){
+  S.mf=S.mf.filter(function(o){return o.id!==oid;});
+  S.days=S.days.map(function(d){return d.oid===oid?Object.assign({},d,{oid:undefined}):d;});
+  inv();saveState();renderLib();renderSched();renderRecon();
+}
+function delONo(oid){
+  S.mf=S.mf.map(function(o){if(o.id!==oid)return o;var c=Object.assign({},o);delete c._cfm;return c;});renderLib();
+}
+
+// ── NEW / EDIT OUTFIT ─────────────────────────────────────────────────────
+var ND={};
+function openNew(){
+  ND={n:'',tag:'casual',ev:0,it:[],sh:null,j:'',bag:'',note:''};
+  el('m-new-body').innerHTML=oForm(ND,'nn','tgND')+'<div class="brow"><button class="bsave" onclick="saveNew()">Save</button><button class="bcan" onclick="closeModal(\'m-new\')">Cancel</button></div>';
+  el('m-new').classList.add('on');
+}
+function tgND(id,isSh){
+  rForm('nn',ND);
+  if(isSh){ND.sh=ND.sh===id?null:id;}else{var i=ND.it.indexOf(id);if(i>=0)ND.it.splice(i,1);else ND.it.push(id);}
+  el('m-new-body').innerHTML=oForm(ND,'nn','tgND')+'<div class="brow"><button class="bsave" onclick="saveNew()">Save</button><button class="bcan" onclick="closeModal(\'m-new\')">Cancel</button></div>';
+}
+function saveNew(){
+  rForm('nn',ND);if(!ND.n.trim()){alert('Please enter a name');return;}
+  S.mf.push(Object.assign({},ND,{id:'x'+Date.now(),n:ND.n.trim(),it:ND.it.slice()}));
+  inv();saveState();closeModal('m-new');renderLib();
+}
+var _eid;
+function openEdit(oid){
+  _eid=oid;var o=findO(oid);if(!o)return;
+  ND={n:o.n,tag:o.tag||'casual',ev:o.ev||0,it:(o.it||[]).slice(),sh:o.sh||null,j:o.j||'',bag:o.bag||'',note:o.note||''};
+  el('m-edit-body').innerHTML=oForm(ND,'ed','tgED')+'<div class="brow"><button class="bsave" onclick="saveEdit()">Save</button><button class="bcan" onclick="closeModal(\'m-edit\')">Cancel</button></div>';
+  el('m-edit').classList.add('on');
+}
+function tgED(id,isSh){
+  rForm('ed',ND);
+  if(isSh){ND.sh=ND.sh===id?null:id;}else{var i=ND.it.indexOf(id);if(i>=0)ND.it.splice(i,1);else ND.it.push(id);}
+  el('m-edit-body').innerHTML=oForm(ND,'ed','tgED')+'<div class="brow"><button class="bsave" onclick="saveEdit()">Save</button><button class="bcan" onclick="closeModal(\'m-edit\')">Cancel</button></div>';
+}
+function saveEdit(){
+  rForm('ed',ND);if(!ND.n.trim()){alert('Please enter a name');return;}
+  S.mf=S.mf.map(function(o){
+    if(o.id!==_eid)return o;
+    return Object.assign({},o,{n:ND.n.trim(),tag:ND.tag,ev:ND.ev,it:ND.it.slice(),sh:ND.sh,j:ND.j,bag:ND.bag,note:ND.note});
+  });
+  inv();saveState();closeModal('m-edit');renderLib();renderSched();
+}
+
+// ── PACKING ───────────────────────────────────────────────────────────────
+function renderPack(){
+  var allIt=entries(IT);
+  var packed=allIt.filter(function(e){return S.checks[e[0]];}).length;
+  var h='<div style="padding-bottom:32px"><div class="phdr"><span>'+packed+' of '+allIt.length+' packed</span>';
+  h+='<button class="btnew" style="font-size:11px;padding:5px 12px" onclick="openAddItem()">+ Add item</button></div>';
+  TORD.forEach(function(type){
+    var ti=allIt.filter(function(e){return e[1].t===type;});if(!ti.length)return;
+    h+='<div class="cathdr"><span>'+TLBL[type]+'</span><span>'+ti.length+'</span></div>';
+    ti.forEach(function(e){
+      var id=e[0],item=e[1],chk=!!S.checks[id],w=wc(id);
+      h+='<div class="prow'+(chk?' done':'')+'">';
+      h+='<div class="ptap" onclick="tgChk(\''+id+'\')">';
+      h+='<div class="chk'+(chk?' on':'')+'">'+( chk?'v':'')+'</div>';
+      h+='<div style="flex:1"><div class="pnm">'+esc(item.n)+'</div>'+(w>0?'<div class="psub">'+w+'x planned</div>':'')+'</div>';
+      if(item.r)h+='<span class="rtr">RTR</span>';
+      h+='</div><div class="pbtns">';
+      if(item._cfm){
+        h+='<span class="cfmtxt">Remove?</span><button class="rd" onclick="delItYes(\''+id+'\')">yes</button><button class="bg" onclick="delItNo(\''+id+'\')">no</button>';
+      }else{
+        h+='<button class="bg" onclick="openEditItem(\''+id+'\')">edit</button><button class="rd" onclick="delIt(\''+id+'\')">del</button>';
+      }
+      h+='</div></div>';
+    });
+  });
+  h+='<button onclick="rstChk()" style="display:block;margin:14px auto;padding:6px 16px;background:none;border:1px solid rgba(0,0,0,0.09);border-radius:20px;font-size:11px;color:#7a7268">Reset checklist</button></div>';
+  el('pane-pack').innerHTML=h;
+}
+function tgChk(id){S.checks[id]=!S.checks[id];saveState();renderPack();}
+function rstChk(){S.checks={};saveState();renderPack();}
+
+function openAddItem(){
+  var h='<div class="ilbl">Name</div><input class="inp" id="ai-n" placeholder="e.g. Grey tank">';
+  h+='<div class="irow"><div><div class="ilbl">Type</div><select class="sel" id="ai-t">';
+  TORD.forEach(function(t){h+='<option value="'+t+'">'+TLBL[t]+'</option>';});
+  h+='</select></div><div><div class="ilbl">Source</div><select class="sel" id="ai-s">';
+  h+='<option value="owned">Owned</option><option value="rtr">RTR</option><option value="buy">Buy</option>';
+  h+='</select></div></div>';
+  h+='<div class="brow"><button class="bsave" onclick="saveNewItem()">Add</button><button class="bcan" onclick="closeModal(\'m-item\')">Cancel</button></div>';
+  el('m-item-body').innerHTML=h;el('m-item').classList.add('on');
+}
+function saveNewItem(){
+  var n=val('ai-n').trim(),t=val('ai-t'),s=val('ai-s');
+  if(!n){alert('Please enter a name');return;}
+  var id='i'+Date.now();IT[id]={n:n,t:t,r:s==='rtr'?1:0};
+  inv();saveState();closeModal('m-item');renderPack();
+}
+var _eiid;
+function openEditItem(id){
+  _eiid=id;var item=IT[id];if(!item)return;
+  var src=item.r===1?'rtr':'owned';
+  var h='<div class="ilbl">Name</div><input class="inp" id="ei-n" value="'+esc(item.n)+'">';
+  h+='<div class="irow"><div><div class="ilbl">Type</div><select class="sel" id="ei-t">';
+  TORD.forEach(function(t){h+='<option value="'+t+'"'+(item.t===t?' selected':'')+'>'+TLBL[t]+'</option>';});
+  h+='</select></div><div><div class="ilbl">Source</div><select class="sel" id="ei-s">';
+  ['owned','rtr','buy'].forEach(function(s){h+='<option value="'+s+'"'+(src===s?' selected':'')+'>'+s.charAt(0).toUpperCase()+s.slice(1)+'</option>';});
+  h+='</select></div></div>';
+  h+='<div class="brow"><button class="bsave" onclick="saveEditItem()">Save</button><button class="bcan" onclick="closeModal(\'m-edititem\')">Cancel</button></div>';
+  el('m-edititem-body').innerHTML=h;el('m-edititem').classList.add('on');
+}
+function saveEditItem(){
+  var n=val('ei-n').trim(),t=val('ei-t'),s=val('ei-s');
+  if(!n){alert('Please enter a name');return;}
+  IT[_eiid]={n:n,t:t,r:s==='rtr'?1:0};
+  inv();saveState();closeModal('m-edititem');renderPack();renderLib();renderSched();
+}
+function delIt(id){IT[id]._cfm=true;renderPack();}
+function delItYes(id){
+  S.mf=S.mf.map(function(o){return Object.assign({},o,{it:(o.it||[]).filter(function(x){return x!==id;}),sh:o.sh===id?null:o.sh});});
+  delete IT[id];delete S.checks[id];
+  inv();saveState();renderPack();renderLib();renderSched();renderRecon();
+}
+function delItNo(id){if(IT[id])delete IT[id]._cfm;renderPack();}
+
+// ── RECON TAB ─────────────────────────────────────────────────────────────
+function renderRecon(){
+  var r=getRC();
+  var h='<div class="sec">';
+  if(r.flags.length){
+    h+='<div style="font-size:12px;font-weight:500;color:#1c1a18;margin-bottom:8px">Flags ('+r.flags.length+')</div>';
+    r.flags.forEach(function(f){
+      var btb=f.type==='btb',item=IT[f.id]?IT[f.id].n:null;
+      h+='<div class="fcrd '+(btb?'r':'a')+'">';
+      if(f.type==='dup')h+='<b>'+esc(f.nm)+'</b> <span style="color:#7a7268">used '+f.c+'x — duplicate outfit</span>';
+      else if(item)h+='<b>'+esc(item)+'</b> <span style="color:#7a7268">'+(btb?'back-to-back: '+f.days.join(' > '):f.type==='once'?'worn once ('+f.day+')':'worn '+f.n+'x — consider reducing')+'</span>';
+      h+='</div>';
+    });
+  }else{h+='<div class="fcrd g">No flags — all good!</div>';}
+  h+='<div style="font-size:12px;font-weight:500;color:#1c1a18;margin:16px 0 8px">Wear counts</div>';
+  keys(r.cnt).sort(function(a,b){return r.cnt[b].n-r.cnt[a].n;}).forEach(function(id){
+    var d=r.cnt[id],item=IT[id];if(!item)return;
+    var f=isFl(id),bc=f?'#d94f3f':d.n>=3?'#2a7a54':'#c4a882';
+    h+='<div class="wcrow"><div style="flex:1"><div style="font-size:13px;color:'+(f?'#d94f3f':'#1c1a18')+'">'+esc(item.n)+(f?'<span style="color:#d94f3f"> !</span>':'')+'</div>';
+    h+='<div style="display:flex;gap:3px;margin-top:3px;flex-wrap:wrap">';
+    d.days.forEach(function(x){h+='<span style="font-size:9px;padding:1px 5px;border-radius:4px;background:#ede9e3;color:#7a7268">'+x.c.slice(0,3)+'</span>';});
+    h+='</div></div><div style="text-align:right;flex-shrink:0"><div style="font-size:13px;font-weight:500;color:'+bc+'">'+d.n+'x</div>';
+    h+='<div class="wbar"><div class="wfill" style="background:'+bc+';width:'+Math.min(100,Math.round(d.n/6*100))+'%"></div></div></div></div>';
+  });
+  h+='<div style="font-size:12px;font-weight:500;color:#1c1a18;margin:16px 0 8px">Never worn</div>';
+  entries(IT).forEach(function(e){
+    if(!r.cnt[e[0]])h+='<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(0,0,0,0.09);font-size:13px;color:#7a7268"><span>'+esc(e[1].n)+'</span><span>0x</span></div>';
+  });
+  h+='</div>';
+  el('pane-recon').innerHTML=h;
+}
+
+// ── TABS ──────────────────────────────────────────────────────────────────
+function showTab(t,btn){
+  var tabs=document.querySelectorAll('.tab');
+  for(var i=0;i<tabs.length;i++)tabs[i].classList.remove('on');
+  var panes=document.querySelectorAll('.pane');
+  for(var j=0;j<panes.length;j++)panes[j].classList.remove('on');
+  btn.classList.add('on');
+  el('pane-'+t).classList.add('on');
+  if(t==='sched')renderSched();
+  else if(t==='lib')renderLib();
+  else if(t==='pack')renderPack();
+  else if(t==='recon')renderRecon();
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+loadState(function(){
+  renderSched();
+  renderLib();
+  renderPack();
+  renderRecon();
+});
+</script>
+
+</body>
+</html>
