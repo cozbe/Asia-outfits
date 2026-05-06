@@ -195,6 +195,7 @@ function saveState(){
 }
 
 function loadState(cb){
+  el('pane-sched').innerHTML='<div style="padding:40px;text-align:center;color:#7a7268;font-size:13px">Loading...</div>';
   fbGet('/state',function(err,data){
     if(!err&&data&&data.mf&&data.mf.length&&data.days&&data.days.length){
       S.mf=data.mf;
@@ -202,7 +203,11 @@ function loadState(cb){
       S.checks=data.checks||{};
       if(data.ci)keys(data.ci).forEach(function(k){IT[k]=data.ci[k];});
     }else{
-      S.mf=cpOf(OD);S.days=cpDays(DD);S.checks={};
+      // no saved data — use defaults and save them immediately
+      S.mf=cpOf(OD);
+      S.days=cpDays(DD);
+      S.checks={};
+      fbSet('/state',{mf:S.mf,days:S.days,checks:S.checks,ci:{},v:4},null);
     }
     cb();
   });
